@@ -1,0 +1,14 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:48:16 WIB 2025
+
+Barang: Mouse Wireless
+Harga Jual: Rp367.000
+Qty: 1
+----------------------------
+Subtotal: Rp367.000
+Grand Total: Rp2.263.000
+Bayar: Rp3.000.000
+Kembalian: Rp737.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

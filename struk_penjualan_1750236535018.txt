@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:48:52 WIB 2025
+
+Barang: Kacamata G200
+Harga Jual: Rp280.000
+Qty: 1
+----------------------------
+Subtotal: Rp280.000
+Diskon: -Rp86.560
+Grand Total: Rp995.440
+Bayar: Rp1.000.000
+Kembalian: Rp4.560
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

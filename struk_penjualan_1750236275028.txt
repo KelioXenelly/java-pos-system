@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:44:30 WIB 2025
+
+Barang: Botol LAR-100
+Harga Jual: Rp191.000
+Qty: 2
+----------------------------
+Subtotal: Rp382.000
+Diskon: -Rp7.640
+Grand Total: Rp374.360
+Bayar: Rp400.000
+Kembalian: Rp25.640
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

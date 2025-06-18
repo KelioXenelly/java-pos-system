@@ -1,0 +1,14 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:46:19 WIB 2025
+
+Barang: Mouse M100
+Harga Jual: Rp496.000
+Qty: 2
+----------------------------
+Subtotal: Rp992.000
+Grand Total: Rp1.288.000
+Bayar: Rp1.300.000
+Kembalian: Rp12.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

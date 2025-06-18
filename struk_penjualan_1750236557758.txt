@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:49:15 WIB 2025
+
+Barang: Keyboard Mekanik
+Harga Jual: Rp307.000
+Qty: 6
+----------------------------
+Subtotal: Rp1.842.000
+Diskon: -Rp286.650
+Grand Total: Rp5.446.350
+Bayar: Rp5.500.000
+Kembalian: Rp53.650
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

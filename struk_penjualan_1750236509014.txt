@@ -1,0 +1,14 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:48:27 WIB 2025
+
+Barang: Kursi Kantor
+Harga Jual: Rp568.000
+Qty: 2
+----------------------------
+Subtotal: Rp1.136.000
+Grand Total: Rp1.136.000
+Bayar: Rp1.200.000
+Kembalian: Rp64.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

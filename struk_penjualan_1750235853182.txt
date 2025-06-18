@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:37:16 WIB 2025
+
+Barang: Meja Lipat
+Harga Jual: Rp523.000
+Qty: 4
+----------------------------
+Subtotal: Rp2.092.000
+Diskon: -Rp425.400
+Grand Total: Rp3.828.600
+Bayar: Rp4.000.000
+Kembalian: Rp171.400
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:39:13 WIB 2025
+
+Barang: Botol KZX-300
+Harga Jual: Rp594.000
+Qty: 10
+----------------------------
+Subtotal: Rp5.940.000
+Diskon: -Rp297.000
+Grand Total: Rp5.643.000
+Bayar: Rp6.000.000
+Kembalian: Rp357.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

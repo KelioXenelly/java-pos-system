@@ -1,0 +1,14 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:40:42 WIB 2025
+
+Barang: Baterai-MT-12
+Harga Jual: Rp330.000
+Qty: 4
+----------------------------
+Subtotal: Rp1.320.000
+Grand Total: Rp1.320.000
+Bayar: Rp1.400.000
+Kembalian: Rp80.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

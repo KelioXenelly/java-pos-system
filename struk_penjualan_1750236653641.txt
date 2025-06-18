@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:50:52 WIB 2025
+
+Barang: Speaker Bluetooth
+Harga Jual: Rp548.000
+Qty: 2
+----------------------------
+Subtotal: Rp1.096.000
+Diskon: -Rp21.920
+Grand Total: Rp1.074.080
+Bayar: Rp1.100.000
+Kembalian: Rp25.920
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

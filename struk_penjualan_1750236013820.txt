@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:40:09 WIB 2025
+
+Barang: Baterai AA
+Harga Jual: Rp192.000
+Qty: 4
+----------------------------
+Subtotal: Rp768.000
+Diskon: -Rp242.300
+Grand Total: Rp4.603.700
+Bayar: Rp4.610.000
+Kembalian: Rp6.300
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

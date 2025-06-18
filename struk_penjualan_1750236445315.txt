@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:47:22 WIB 2025
+
+Barang: Botol ZDA-500
+Harga Jual: Rp343.000
+Qty: 2
+----------------------------
+Subtotal: Rp686.000
+Diskon: -Rp23.420
+Grand Total: Rp1.147.580
+Bayar: Rp1.150.000
+Kembalian: Rp2.420
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

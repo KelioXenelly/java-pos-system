@@ -1,0 +1,14 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 15:49:37 WIB 2025
+
+Barang: Jam-X1
+Harga Jual: Rp523.000
+Qty: 1
+----------------------------
+Subtotal: Rp523.000
+Grand Total: Rp523.000
+Bayar: Rp600.000
+Kembalian: Rp77.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.
