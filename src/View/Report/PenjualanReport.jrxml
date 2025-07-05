@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ecea1df9-4fbe-4e53-aaa6-6716c7dc7336">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="118"/>
+	<property name="ireport.x" value="10"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="DARI_TANGGAL" class="java.util.Date"/>
 	<parameter name="SAMPAI_TANGGAL" class="java.util.Date"/>
@@ -276,28 +276,28 @@ LEFT JOIN
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{GrandTotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{GrandTotal})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="407" y="11" width="81" height="20" uuid="f7c582ad-3259-4772-8e24-a7e714dbdd6b"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{TotalHarga}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{TotalHarga})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="507" y="11" width="79" height="20" uuid="c9533ec1-581e-4f35-b57a-62fb7715766c"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{Jumlah}.toString()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{Jumlah})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="604" y="11" width="78" height="20" uuid="ec0694e5-ec2f-4705-b1ee-9872092cbbbd"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{TotalDiskon}.toString()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{TotalDiskon})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

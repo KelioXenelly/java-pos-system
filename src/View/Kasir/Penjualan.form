@@ -142,7 +142,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="plusBtn" min="-2" pref="48" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="okBtn" pref="178" max="32767" attributes="0"/>
+                                      <Component id="okBtn" pref="166" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -316,7 +316,7 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="0" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -641,12 +641,6 @@
                       </Group>
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="salesBtn5" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="kelolaBarangBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="pemutihanBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="laporanBtn" min="-2" pref="112" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="logoutBtn5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -667,10 +661,7 @@
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="salesBtn5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="kelolaBarangBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="pemutihanBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="logoutBtn5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="laporanBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -714,36 +705,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="salesBtn5MouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="kelolaBarangBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Kelola Barang"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kelolaBarangBtnMouseClicked"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="pemutihanBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Pemutihan Barang"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pemutihanBtnMouseClicked"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="logoutBtn5">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logoutBtn5MouseClicked"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="laporanBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Laporan"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="laporanBtnMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

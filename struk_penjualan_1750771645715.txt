@@ -1,0 +1,15 @@
+===== STRUK PENJUALAN =====
+Tanggal: Tue Jun 24 20:27:15 WIB 2025
+
+Barang: Printer G100
+Harga Jual: Rp385.000
+Qty: 1
+----------------------------
+Subtotal: Rp385.000
+Diskon: -Rp79.500
+Grand Total: Rp715.500
+Bayar: Rp800.000
+Kembalian: Rp84.500
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

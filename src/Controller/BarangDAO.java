@@ -172,4 +172,21 @@ public class BarangDAO {
             e.printStackTrace();
         }
     }
+    
+    public boolean isKodeBarangExist(String kode_barang) {
+    boolean exists = false;
+    try {
+        String sql = "SELECT COUNT(*) FROM barang WHERE kode_barang = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, kode_barang);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            exists = rs.getInt(1) > 0;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return exists;
+}
 }

@@ -165,21 +165,21 @@ ORDER BY kode_barang ASC;]]>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$F{harga_beli}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $F{harga_beli})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="604" y="12" width="79" height="20" uuid="7fe81fc4-929f-4160-8647-ab9780cce315"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$F{harga_jual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $F{harga_jual})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="704" y="12" width="89" height="20" uuid="4ceb4429-1a77-440b-babc-fd11a412c8c5"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$F{profit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp" + String.format("%.0f", $F{profit})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -232,21 +232,21 @@ ORDER BY kode_barang ASC;]]>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{TotalHargaBeli}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{TotalHargaBeli})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="604" y="11" width="79" height="20" uuid="842b3b24-b0ea-498d-b5e6-f5c143b44f73"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{TotalHargaJual}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{TotalHargaJual})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="704" y="11" width="89" height="20" uuid="18778233-b3dc-4184-a98c-f8ff316108f7"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Rp"+$V{TotalProfit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rp"+String.format("%.0f", $V{TotalProfit})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -50,10 +50,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel13 = new javax.swing.JLabel();
         salesBtn5 = new javax.swing.JButton();
-        kelolaBarangBtn = new javax.swing.JButton();
-        pemutihanBtn = new javax.swing.JButton();
         logoutBtn5 = new javax.swing.JButton();
-        laporanBtn = new javax.swing.JButton();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -100,31 +97,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        kelolaBarangBtn.setText("Kelola Barang");
-        kelolaBarangBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                kelolaBarangBtnMouseClicked(evt);
-            }
-        });
-
-        pemutihanBtn.setText("Pemutihan Barang");
-        pemutihanBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pemutihanBtnMouseClicked(evt);
-            }
-        });
-
         logoutBtn5.setText("Logout");
         logoutBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoutBtn5MouseClicked(evt);
-            }
-        });
-
-        laporanBtn.setText("Laporan");
-        laporanBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                laporanBtnMouseClicked(evt);
             }
         });
 
@@ -139,13 +115,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(66, 66, 66)
                 .addComponent(salesBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(kelolaBarangBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pemutihanBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(laporanBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 695, Short.MAX_VALUE)
                 .addComponent(logoutBtn5)
                 .addGap(34, 34, 34))
         );
@@ -162,10 +132,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(salesBtn5)
-                            .addComponent(kelolaBarangBtn)
-                            .addComponent(pemutihanBtn)
-                            .addComponent(logoutBtn5)
-                            .addComponent(laporanBtn))))
+                            .addComponent(logoutBtn5))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -211,30 +178,6 @@ public class Dashboard extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_logoutBtn5MouseClicked
-
-    private void kelolaBarangBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kelolaBarangBtnMouseClicked
-        KelolaBarang kelolaBarangPage = new KelolaBarang();
-        kelolaBarangPage.setVisible(true);
-        kelolaBarangPage.setLocationRelativeTo(null);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_kelolaBarangBtnMouseClicked
-
-    private void pemutihanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pemutihanBtnMouseClicked
-        PemutihanBarang pemutihanPage = new PemutihanBarang();
-        pemutihanPage.setVisible(true);
-        pemutihanPage.setLocationRelativeTo(null);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_pemutihanBtnMouseClicked
-
-    private void laporanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanBtnMouseClicked
-        Laporan laporanPage = new Laporan();
-        laporanPage.setVisible(true);
-        laporanPage.setLocationRelativeTo(null);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_laporanBtnMouseClicked
          
     /**
      * @param args the command line arguments
@@ -295,10 +238,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JButton kelolaBarangBtn;
-    private javax.swing.JButton laporanBtn;
     private javax.swing.JButton logoutBtn5;
-    private javax.swing.JButton pemutihanBtn;
     private javax.swing.JButton salesBtn5;
     // End of variables declaration//GEN-END:variables
 }

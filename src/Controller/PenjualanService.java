@@ -25,11 +25,11 @@ public class PenjualanService {
         this.penjualanDAO = penjualanDAO;
     }
     
-    public void processPenjualan(Penjualan penjualan) {
+    public void processPenjualan(Penjualan penjualan, int qtyStok) {
         try {
-            double harga_beli = detailBarangDAO.getHargaBeliByBarangIdAndHargaJual(
+            double harga_beli = detailBarangDAO.getHargaBeliByBarangIdAndQtyStok(
                 penjualan.getBarang().getBarangId(),
-                penjualan.getHargaJual()
+                qtyStok
             );
 
             DetailBarang detailBarang = detailBarangDAO.getByBarangIdAndHargaBeli(

@@ -1,0 +1,14 @@
+===== STRUK PENJUALAN =====
+Tanggal: Wed Jun 18 20:00:47 WIB 2025
+
+Barang: KElio
+Harga Jual: Rp330.000
+Qty: 1
+----------------------------
+Subtotal: Rp330.000
+Grand Total: Rp330.000
+Bayar: Rp350.000
+Kembalian: Rp20.000
+----------------------------
+Terima kasih atas pembelian!
+Semoga harimu menyenangkan.

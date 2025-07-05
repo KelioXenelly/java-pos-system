@@ -4,7 +4,7 @@
  */
 package View.Kasir;
 
-import View.Kasir.*;
+import View.Admin.*;
 import Controller.BarangDAO;
 import Controller.DetailBarangDAO;
 import Controller.PenjualanDAO;
@@ -117,9 +117,9 @@ public class Penjualan extends javax.swing.JFrame {
                 barang.getBarang().getKodeBarang(),
                 barang.getBarang().getNamaBarang(),
                 barang.getQty(),
-                barang.getHargaBeli(),
-                barang.getHargaJual(),
-                barang.getProfit(),
+                String.format("%,.1f", barang.getHargaBeli()),
+                String.format("%,.1f", barang.getHargaJual()),
+                String.format("%,.1f", barang.getProfit()),
                 barang.getBarang().getBarangId(),
             });
             i++;
@@ -349,10 +349,7 @@ public class Penjualan extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         javax.swing.JLabel jLabel19 = new javax.swing.JLabel();
         salesBtn5 = new javax.swing.JButton();
-        kelolaBarangBtn = new javax.swing.JButton();
-        pemutihanBtn = new javax.swing.JButton();
         logoutBtn5 = new javax.swing.JButton();
-        laporanBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -464,6 +461,9 @@ public class Penjualan extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableBarang);
+        if (tableBarang.getColumnModel().getColumnCount() > 0) {
+            tableBarang.getColumnModel().getColumn(7).setMaxWidth(0);
+        }
 
         okBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         okBtn.setText("OK");
@@ -501,7 +501,7 @@ public class Penjualan extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(plusBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(okBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))))
+                                .addComponent(okBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -729,31 +729,10 @@ public class Penjualan extends javax.swing.JFrame {
             }
         });
 
-        kelolaBarangBtn.setText("Kelola Barang");
-        kelolaBarangBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                kelolaBarangBtnMouseClicked(evt);
-            }
-        });
-
-        pemutihanBtn.setText("Pemutihan Barang");
-        pemutihanBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pemutihanBtnMouseClicked(evt);
-            }
-        });
-
         logoutBtn5.setText("Logout");
         logoutBtn5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logoutBtn5MouseClicked(evt);
-            }
-        });
-
-        laporanBtn.setText("Laporan");
-        laporanBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                laporanBtnMouseClicked(evt);
             }
         });
 
@@ -768,12 +747,6 @@ public class Penjualan extends javax.swing.JFrame {
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(66, 66, 66)
                 .addComponent(salesBtn5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(kelolaBarangBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pemutihanBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(laporanBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutBtn5)
                 .addGap(34, 34, 34))
@@ -791,10 +764,7 @@ public class Penjualan extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(salesBtn5)
-                            .addComponent(kelolaBarangBtn)
-                            .addComponent(pemutihanBtn)
-                            .addComponent(logoutBtn5)
-                            .addComponent(laporanBtn))))
+                            .addComponent(logoutBtn5))))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -962,7 +932,8 @@ public class Penjualan extends javax.swing.JFrame {
             int selectedRow = tableBarang.getSelectedRow();
             if (selectedRow != -1) {
                 int qty = Integer.parseInt(jumlahTxt.getText());
-                double harga_jual = Double.parseDouble(model.getValueAt(selectedRow, 5).toString());
+                String jualInput = (String) model.getValueAt(selectedRow, 5); 
+                double harga_jual = Double.parseDouble(jualInput.replace(".", "").replace(",", "."));
                 double jumlah_qty = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
 
                 if(qty <= jumlah_qty) {
@@ -999,8 +970,8 @@ public class Penjualan extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Data tidak lengkap.");
                     return;
                 }
-                
-                double hargaJual = Double.parseDouble(hargaJualObj.toString());
+                String jualStr = hargaJualObj.toString();
+                double hargaJual = Double.parseDouble(jualStr.replace(".", "").replace(",", "."));
                 int qtyStok = Integer.parseInt(qtyStokObj.toString());
                 int qtyJual = Integer.parseInt(jumlahTxt.getText());
                 
@@ -1033,7 +1004,7 @@ public class Penjualan extends javax.swing.JFrame {
                 
                 kembalianLbl.setText("Rp" + kembalian);
                 
-                penjualanService.processPenjualan(pjl);
+                penjualanService.processPenjualan(pjl, qtyStok);
                 
                 int confirm = JOptionPane.showConfirmDialog(null, "Ingin mencetak struk?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
@@ -1085,8 +1056,8 @@ public class Penjualan extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Data tidak lengkap.");
                     return;
                 }
-                
-                double hargaJual = Double.parseDouble(hargaJualObj.toString());
+                String jualStr = hargaJualObj.toString();
+                double hargaJual = Double.parseDouble(jualStr.replace(".", "").replace(",", "."));
                 int qtyStok = Integer.parseInt(qtyStokObj.toString());
                 int qtyJual = Integer.parseInt(jumlahTxt.getText());
                 
@@ -1119,7 +1090,7 @@ public class Penjualan extends javax.swing.JFrame {
                 
                 kembalianLbl.setText("Rp" + kembalian);
                 
-                penjualanService.processPenjualan(pjl);
+                penjualanService.processPenjualan(pjl, qtyStok);
                 
                 int confirm = JOptionPane.showConfirmDialog(null, "Ingin mencetak struk?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
@@ -1154,22 +1125,6 @@ public class Penjualan extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_salesBtn5MouseClicked
 
-    private void kelolaBarangBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kelolaBarangBtnMouseClicked
-        KelolaBarang kelolaBarangPage = new KelolaBarang();
-        kelolaBarangPage.setVisible(true);
-        kelolaBarangPage.setLocationRelativeTo(null);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_kelolaBarangBtnMouseClicked
-
-    private void pemutihanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pemutihanBtnMouseClicked
-        PemutihanBarang pemutihanPage = new PemutihanBarang();
-        pemutihanPage.setVisible(true);
-        pemutihanPage.setLocationRelativeTo(null);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_pemutihanBtnMouseClicked
-
     private void logoutBtn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtn5MouseClicked
         JOptionPane.showMessageDialog(null, "Anda berhasil keluar.");
         LoginPanel login = new LoginPanel();
@@ -1177,14 +1132,6 @@ public class Penjualan extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_logoutBtn5MouseClicked
-
-    private void laporanBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laporanBtnMouseClicked
-        Laporan laporanPage = new Laporan();
-        laporanPage.setVisible(true);
-        laporanPage.setLocationRelativeTo(null);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_laporanBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1246,13 +1193,10 @@ public class Penjualan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jumlahTxt;
-    private javax.swing.JButton kelolaBarangBtn;
     private javax.swing.JLabel kembalianLbl;
-    private javax.swing.JButton laporanBtn;
     private javax.swing.JButton logoutBtn5;
     private javax.swing.JButton minusBtn;
     private javax.swing.JButton okBtn;
-    private javax.swing.JButton pemutihanBtn;
     private javax.swing.JLabel persentaseDiskonLbl;
     private javax.swing.JComboBox<String> pilihBarangDropDown;
     private javax.swing.JButton plusBtn;

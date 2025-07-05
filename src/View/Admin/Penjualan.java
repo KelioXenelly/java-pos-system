@@ -116,9 +116,9 @@ public class Penjualan extends javax.swing.JFrame {
                 barang.getBarang().getKodeBarang(),
                 barang.getBarang().getNamaBarang(),
                 barang.getQty(),
-                barang.getHargaBeli(),
-                barang.getHargaJual(),
-                barang.getProfit(),
+                String.format("%,.1f", barang.getHargaBeli()),
+                String.format("%,.1f", barang.getHargaJual()),
+                String.format("%,.1f", barang.getProfit()),
                 barang.getBarang().getBarangId(),
             });
             i++;
@@ -464,6 +464,9 @@ public class Penjualan extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tableBarang);
+        if (tableBarang.getColumnModel().getColumnCount() > 0) {
+            tableBarang.getColumnModel().getColumn(7).setMaxWidth(0);
+        }
 
         okBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         okBtn.setText("OK");
@@ -972,7 +975,8 @@ public class Penjualan extends javax.swing.JFrame {
             int selectedRow = tableBarang.getSelectedRow();
             if (selectedRow != -1) {
                 int qty = Integer.parseInt(jumlahTxt.getText());
-                double harga_jual = Double.parseDouble(model.getValueAt(selectedRow, 5).toString());
+                String jualInput = (String) model.getValueAt(selectedRow, 5); 
+                double harga_jual = Double.parseDouble(jualInput.replace(".", "").replace(",", "."));
                 double jumlah_qty = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
 
                 if(qty <= jumlah_qty) {
@@ -1009,8 +1013,8 @@ public class Penjualan extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Data tidak lengkap.");
                     return;
                 }
-                
-                double hargaJual = Double.parseDouble(hargaJualObj.toString());
+                String jualStr = hargaJualObj.toString();
+                double hargaJual = Double.parseDouble(jualStr.replace(".", "").replace(",", "."));
                 int qtyStok = Integer.parseInt(qtyStokObj.toString());
                 int qtyJual = Integer.parseInt(jumlahTxt.getText());
                 
@@ -1043,7 +1047,7 @@ public class Penjualan extends javax.swing.JFrame {
                 
                 kembalianLbl.setText("Rp" + kembalian);
                 
-                penjualanService.processPenjualan(pjl);
+                penjualanService.processPenjualan(pjl, qtyStok);
                 
                 int confirm = JOptionPane.showConfirmDialog(null, "Ingin mencetak struk?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
@@ -1095,8 +1099,8 @@ public class Penjualan extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Data tidak lengkap.");
                     return;
                 }
-                
-                double hargaJual = Double.parseDouble(hargaJualObj.toString());
+                String jualStr = hargaJualObj.toString();
+                double hargaJual = Double.parseDouble(jualStr.replace(".", "").replace(",", "."));
                 int qtyStok = Integer.parseInt(qtyStokObj.toString());
                 int qtyJual = Integer.parseInt(jumlahTxt.getText());
                 
@@ -1129,7 +1133,7 @@ public class Penjualan extends javax.swing.JFrame {
                 
                 kembalianLbl.setText("Rp" + kembalian);
                 
-                penjualanService.processPenjualan(pjl);
+                penjualanService.processPenjualan(pjl, qtyStok);
                 
                 int confirm = JOptionPane.showConfirmDialog(null, "Ingin mencetak struk?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {

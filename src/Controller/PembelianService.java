@@ -29,12 +29,15 @@ public class PembelianService {
         if(detailBarang != null) {
             // Update qty saja
             int updatedQty = detailBarang.getQty() + pbl.getQty();
-            detailBarangDAO.updateQty(detailBarang.getDetailBarangId(), updatedQty);
+            double profit = detailBarang.getHargaJual() - detailBarang.getHargaBeli();
+            detailBarangDAO.updateQtyAndProfit(detailBarang.getDetailBarangId(), updatedQty, profit);
+            detailBarangDAO.updateHargaJual(pbl.getBarang().getBarangId(), pbl.getHargaJual());
         } else {
             // Tidak ada -> tambahkan sebagai detailbarang baru
             DetailBarang newDetailBarang = new DetailBarang(pbl.getBarang(), pbl.getQty(),
                 pbl.getHargaBeli(), pbl.getHargaJual(), pbl.getProfit());
             detailBarangDAO.insert(newDetailBarang);
+            detailBarangDAO.updateHargaJual(pbl.getBarang().getBarangId(), pbl.getHargaJual());
         }
     }
 }

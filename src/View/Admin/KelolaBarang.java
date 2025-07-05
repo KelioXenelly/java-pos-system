@@ -36,8 +36,8 @@ import java.util.logging.Logger;
 public class KelolaBarang extends javax.swing.JFrame {
     private Connection conn = DatabaseConnection.getConnection();
     private DefaultTableModel model = new DefaultTableModel();
-    private BarangDAO barangDAO;
     private DetailBarangDAO detailBarangDAO;
+    private BarangDAO barangDAO;
     private PembelianDAO pembelianDAO;
     private DetailBarangService detailBarangService;
     private PembelianService pembelianService;
@@ -95,8 +95,6 @@ public class KelolaBarang extends javax.swing.JFrame {
         tableBarang.getColumnModel().getColumn(10).setPreferredWidth(0);
         
         setLocationRelativeTo(null);
-        
-        
         loadData();
     }
     
@@ -369,6 +367,16 @@ public class KelolaBarang extends javax.swing.JFrame {
         jLabel8.setText("Harga Beli:");
 
         beliHargaBeliTxt.setToolTipText("");
+        beliHargaBeliTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                beliHargaBeliTxtMouseClicked(evt);
+            }
+        });
+        beliHargaBeliTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beliHargaBeliTxtActionPerformed(evt);
+            }
+        });
 
         beliQtyTxt.setToolTipText("");
 
@@ -376,6 +384,11 @@ public class KelolaBarang extends javax.swing.JFrame {
         jLabel9.setText("Qty:");
 
         beliHargaJualTxt.setToolTipText("");
+        beliHargaJualTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                beliHargaJualTxtMouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Harga Jual:");
@@ -649,9 +662,9 @@ public class KelolaBarang extends javax.swing.JFrame {
                 barang.getBarang().getKodeBarang(),
                 barang.getBarang().getNamaBarang(),
                 barang.getQty(),
-                barang.getHargaBeli(),
-                barang.getHargaJual(),
-                barang.getProfit(),
+                String.format("%,.1f", barang.getHargaBeli()),
+                String.format("%,.1f", barang.getHargaJual()),
+                String.format("%,.1f", barang.getProfit()),
                 barang.getBarang().getBarangId(),
                 barang.getDetailBarangId(),
                 barang.getTanggalBeli(),
@@ -721,8 +734,15 @@ public class KelolaBarang extends javax.swing.JFrame {
         String nama_barang = namaBarangTxt.getText();
         
         if(!kode_barang.isEmpty() || !nama_barang.isEmpty()) {
+            if (barangDAO.isKodeBarangExist(kode_barang)) {
+                JOptionPane.showMessageDialog(null, 
+                    "Kode barang sudah ada. Harap gunakan kode yang berbeda.",
+                    "Kode Duplikat",
+                    JOptionPane.WARNING_MESSAGE);
+                return; // hentikan proses insert
+            }
+            
             Barang brg = new Barang(kode_barang, nama_barang);
-
             barangDAO.insert(brg);
             try {
                 Thread.sleep(500);
@@ -766,43 +786,53 @@ public class KelolaBarang extends javax.swing.JFrame {
 
     private void prosesBeliBarangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prosesBeliBarangMouseClicked
         int selectedRow = tableBarang.getSelectedRow();
-        if (selectedRow != -1) {
-            int barang_id = Integer.parseInt(model.getValueAt(selectedRow, 7).toString());
-            String kode_barang = buatKodeBarangTxt.getText();
-            String nama_barang = namaBarangTxt.getText();
-            Date tanggal_beli = beliTanggalBeliChooser.getDate();
-            int qty = Integer.parseInt(beliQtyTxt.getText());
-            double harga_beli = Double.parseDouble(beliHargaBeliTxt.getText());
-            double harga_jual = Double.parseDouble(beliHargaJualTxt.getText());
-            double profit = harga_jual - harga_beli;
-            String keterangan = keteranganTextBox.getText();
-            
-            if(!kode_barang.isEmpty() && !nama_barang.isEmpty() && tanggal_beli != null && qty > 0 && 
-                harga_beli != 0 && harga_jual != 0) {
-                Barang brg = new Barang(barang_id, kode_barang, nama_barang);
-                Pembelian pbl = new Pembelian(barang_id, tanggal_beli, brg, qty, harga_beli, harga_jual, 
-                        profit, keterangan);
-                
-                try {
-                    // Proses detail barang: update atau insert
-                    pembelianService.processIncomingStock(pbl);
-                    
-                    // Simpan transaksi pembelian
-                    pembelianDAO.insert(pbl);
-                    
-                    Thread.sleep(500);
-                    
-                    loadData();
-                } catch (SQLException ex) {
-                    Logger.getLogger(KelolaBarang.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(KelolaBarang.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Harap memasukkan data secara lengkap", "Input Error", JOptionPane.WARNING_MESSAGE);
+        String kode_barang = beliKodeBarang.getSelectedItem().toString();
+        String nama_barang = beliNamaBarangTxt.getText();
+        
+        Barang barang = barangDAO.getByKdBarang(kode_barang);
+        if (barang == null) {
+            JOptionPane.showMessageDialog(null,
+                "Barang dengan kode " + kode_barang + " tidak ditemukan.",
+                "Data Tidak Ditemukan",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int barang_id = barang.getBarangId();
+        
+        Date tanggal_beli = beliTanggalBeliChooser.getDate();
+        int qty = Integer.parseInt(beliQtyTxt.getText());
+
+        String beliInput = beliHargaBeliTxt.getText(); 
+        String jualInput = beliHargaJualTxt.getText(); 
+        double harga_beli = Double.parseDouble(beliInput.replace(".", "").replace(",", "."));
+        double harga_jual = Double.parseDouble(jualInput.replace(".", "").replace(",", "."));
+
+        double profit = harga_jual - harga_beli;
+        String keterangan = keteranganTextBox.getText();
+
+        if(!kode_barang.isEmpty() && !nama_barang.isEmpty() && tanggal_beli != null && qty > 0 && 
+            harga_beli != 0 && harga_jual != 0) {
+            Barang brg = new Barang(barang_id, kode_barang, nama_barang);
+            Pembelian pbl = new Pembelian(barang_id, tanggal_beli, brg, qty, harga_beli, harga_jual, 
+                    profit, keterangan);
+
+            try {
+                // Proses detail barang: update atau insert
+                pembelianService.processIncomingStock(pbl);
+
+                // Simpan transaksi pembelian
+                pembelianDAO.insert(pbl);
+
+                Thread.sleep(500);
+
+                loadData();
+            } catch (SQLException ex) {
+                Logger.getLogger(KelolaBarang.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(KelolaBarang.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Tidak ada baris yang dipilih.");
+            JOptionPane.showMessageDialog(null, "Harap memasukkan data secara lengkap", "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_prosesBeliBarangMouseClicked
 
@@ -815,8 +845,10 @@ public class KelolaBarang extends javax.swing.JFrame {
             String nama_barang = namaBarangTxt.getText();
             Date tanggal_beli = beliTanggalBeliChooser.getDate();
             int qty = Integer.parseInt(beliQtyTxt.getText());
-            double harga_beli = Double.parseDouble(beliHargaBeliTxt.getText());
-            double harga_jual = Double.parseDouble(beliHargaJualTxt.getText());
+            String beliInput = beliHargaBeliTxt.getText(); 
+            String jualInput = beliHargaJualTxt.getText(); 
+            double harga_beli = Double.parseDouble(beliInput.replace(".", "").replace(",", "."));
+            double harga_jual = Double.parseDouble(jualInput.replace(".", "").replace(",", "."));
             double profit = harga_jual - harga_beli;
             String keterangan = keteranganTextBox.getText();
             
@@ -843,7 +875,15 @@ public class KelolaBarang extends javax.swing.JFrame {
             String kode_barang = buatKodeBarangTxt.getText();
             String nama_barang = namaBarangTxt.getText();
 
-            Barang brg = new Barang(barang_id, kode_barang, nama_barang);
+            if (barangDAO.isKodeBarangExist(kode_barang)) {
+                JOptionPane.showMessageDialog(null, 
+                    "Kode barang sudah ada. Harap gunakan kode yang berbeda.",
+                    "Kode Duplikat",
+                    JOptionPane.WARNING_MESSAGE);
+                return; // hentikan proses update
+            }
+            
+            Barang brg = new Barang(barang_id, kode_barang, nama_barang); 
 
             barangDAO.update(brg);
             try {
@@ -933,11 +973,15 @@ public class KelolaBarang extends javax.swing.JFrame {
     private void hapusBarangBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hapusBarangBtnMouseClicked
         int selectedRow = tableBarang.getSelectedRow();
         if (selectedRow != -1) {
-            int barang_id = (int) model.getValueAt(selectedRow, 7);
+            int detail_barang_id = Integer.parseInt(model.getValueAt(selectedRow, 8).toString());
             int qty = (int) model.getValueAt(selectedRow, 3);
-            double harga_beli = (double) model.getValueAt(selectedRow, 4);
-            double harga_jual = (double) model.getValueAt(selectedRow, 5);
-            double profit = (double) model.getValueAt(selectedRow, 6);
+            
+            String beliInput = (String) model.getValueAt(selectedRow, 4); 
+            String jualInput = (String) model.getValueAt(selectedRow, 5); 
+            String profitInput = (String) model.getValueAt(selectedRow, 6); 
+            double harga_beli = Double.parseDouble(beliInput.replace(".", "").replace(",", "."));
+            double harga_jual = Double.parseDouble(jualInput.replace(".", "").replace(",", "."));
+            double profit = Double.parseDouble(profitInput.replace(".", "").replace(",", "."));
             
             if(qty > 0) {
                 JOptionPane.showMessageDialog(null, "Tidak dapat menghapus barang, karena stoknya belum kosong.");
@@ -948,7 +992,7 @@ public class KelolaBarang extends javax.swing.JFrame {
                             + "semua transaksi berhubungan dengan barang ini akan ikut terhapus seperti transaksi pembelian, penjualan, dsb.", "Warning", dialogBtn);
 
                 if (confirmDelete == JOptionPane.YES_OPTION) {
-                    barangDAO.delete(barang_id);
+                    detailBarangDAO.softDelete(detail_barang_id);
                     try {
                         Thread.sleep(500);
                     } catch (InterruptedException ex) {
@@ -979,6 +1023,22 @@ public class KelolaBarang extends javax.swing.JFrame {
 
         this.setVisible(false);
     }//GEN-LAST:event_laporanBtnMouseClicked
+
+    private void beliHargaBeliTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beliHargaBeliTxtMouseClicked
+       
+    }//GEN-LAST:event_beliHargaBeliTxtMouseClicked
+
+    private void beliHargaJualTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_beliHargaJualTxtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_beliHargaJualTxtMouseClicked
+
+    private void beliHargaBeliTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beliHargaBeliTxtActionPerformed
+       double harga_jual_old = Double.parseDouble(beliHargaBeliTxt.getText());
+       
+       double new_harga_def = harga_jual_old + (harga_jual_old * 10/100);
+       
+       beliHargaJualTxt.setText(String.valueOf(new_harga_def));
+    }//GEN-LAST:event_beliHargaBeliTxtActionPerformed
 
     /**
      * @param args the command line arguments

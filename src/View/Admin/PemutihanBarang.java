@@ -115,9 +115,9 @@ public class PemutihanBarang extends javax.swing.JFrame {
                 barang.getBarang().getKodeBarang(),
                 barang.getBarang().getNamaBarang(),
                 barang.getQty(),
-                barang.getHargaBeli(),
-                barang.getHargaJual(),
-                barang.getProfit(),
+                String.format("%,.1f", barang.getHargaBeli()),
+                String.format("%,.1f", barang.getHargaJual()),
+                String.format("%,.1f", barang.getProfit()),
                 barang.getBarang().getBarangId(),
                 barang.getDetailBarangId(),
                 barang.getTanggalBeli(),
@@ -631,8 +631,10 @@ public class PemutihanBarang extends javax.swing.JFrame {
         }
 
         int qtyTable = Integer.parseInt(qtyObj.toString());
-        double hargaBeliTable = Double.parseDouble(hargaBeliObj.toString());
-        double hargaJualTable = Double.parseDouble(hargaJualObj.toString());
+        String beliStr = hargaBeliObj.toString();
+        String jualStr = hargaJualObj.toString();
+        double hargaBeliTable = Double.parseDouble(beliStr.replace(".", "").replace(",", "."));
+        double hargaJualTable = Double.parseDouble(jualStr.replace(".", "").replace(",", "."));
 
         // Ambil data dari form input
         String nama_barang = namaBarangTxt.getText();

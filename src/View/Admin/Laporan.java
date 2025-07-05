@@ -509,8 +509,11 @@ public class Laporan extends javax.swing.JFrame {
             
             jd.setLanguage("java");
             
-            String sql = "SELECT barang.barang_id, kode_barang, nama_barang, detailbarang.qty, "
-                       + "detailbarang.harga_beli, detailbarang.harga_jual, detailbarang.profit "
+            String sql = "SELECT barang.barang_id, kode_barang, nama_barang, "
+                       + "IFNULL(detailbarang.qty, 0) AS qty, "
+                       + "IFNULL(detailbarang.harga_beli, 0) AS harga_beli, "
+                       + "IFNULL(detailbarang.harga_jual, 0) AS harga_jual, "
+                       + "IFNULL(detailbarang.profit, 0) AS profit "
                        + "FROM barang "
                        + "LEFT JOIN detailbarang ON barang.barang_id = detailbarang.barang_id "
                        + "ORDER BY kode_barang ASC";

@@ -37,6 +37,7 @@ public class DetailBarangDAO {
                    + "     ORDER BY tanggal_beli DESC LIMIT 1) AS keterangan "
                    + "FROM barang "
                    + "LEFT JOIN detailbarang ON barang.barang_id = detailbarang.barang_id "
+                   + "WHERE detailbarang.active = 1 "
                    + "ORDER BY kode_barang ASC";
         
         try {
@@ -167,6 +168,26 @@ public class DetailBarangDAO {
         }
     }
     
+    public void softDelete(int detail_barang_id) {
+        String sql = "UPDATE detailbarang SET active = ? WHERE detail_barang_id = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setBoolean(1, false);
+            pstmt.setInt(2, detail_barang_id);
+            
+            int affectedRows = pstmt.executeUpdate();
+            
+            if (affectedRows == 0) {
+                throw new SQLException("Gagal menghapus detail barang, data detail barang tidak ditemukan.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Data Detail Barang Berhasil Dihapus!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     // Cari detail barang berdasarkan barang_id dan harga_beli
     public DetailBarang getByBarangIdAndHargaBeli(int barang_id, double harga_beli) {
         String sql = "SELECT detail_barang_id, barang.barang_id, barang.kode_barang, barang.nama_barang, "
@@ -204,12 +225,12 @@ public class DetailBarangDAO {
         return null;
     }
     
-    public double getHargaBeliByBarangIdAndHargaJual(int barang_id, double harga_jual) throws SQLException {
-        String sql = "SELECT harga_beli FROM detailbarang WHERE barang_id = ? AND harga_jual = ?";
+    public double getHargaBeliByBarangIdAndQtyStok(int barang_id, int qtyStok) throws SQLException {
+        String sql = "SELECT harga_beli FROM detailbarang WHERE barang_id = ? AND qty = ?";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, barang_id);
-            pstmt.setDouble(2, harga_jual);
+            pstmt.setDouble(2, qtyStok);
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
@@ -220,19 +241,29 @@ public class DetailBarangDAO {
         throw new SQLException("Barang tidak ditemukan.");
     }
     
-    // Update qty barang yang sudah ada
-    public void updateQty(int detail_barang_id, int newQty) throws SQLException {
-        String sql = "UPDATE detailbarang SET qty = ? WHERE detail_barang_id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, newQty);
-            pstmt.setInt(2, detail_barang_id);
+    public void updateHargaJual(int barang_id, double new_harga_jual) {
+        String sql = "UPDATE detailbarang SET harga_jual = ? WHERE barang_id = ?";
+        
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setDouble(1, new_harga_jual);
+            pstmt.setInt(2, barang_id);
             pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
     public void updateQtyAndProfit(int detail_barang_id, int newQty, double newProfit) {
         String sql = "UPDATE detailbarang SET qty = ?, profit = ? WHERE detail_barang_id = ?";
-        
+        if (newQty < 0) {
+            System.out.println("Qty tidak boleh negatif.");
+            return;
+        }
+        if (newQty > Integer.MAX_VALUE) {
+            System.out.println("Qty terlalu besar.");
+            return;
+        }
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, newQty);
